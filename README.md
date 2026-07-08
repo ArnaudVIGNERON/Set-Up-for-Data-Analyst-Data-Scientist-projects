@@ -22,18 +22,18 @@ Recommended Workflow
 
 For every Python project, we want the same clean structure:
 
-project-name/
-├── .git/
-├── .venv/
+project-name
+├── .git
+├── .venv
 ├── .python-version
 ├── .gitignore
 ├── pyproject.toml
 ├── uv.lock
 ├── README.md
-├── notebooks/
-├── data/
-├── src/
-└── tests/
+├── notebooks
+├── data
+├── src
+└── tests
 
 Each tool has a specific role:
 
