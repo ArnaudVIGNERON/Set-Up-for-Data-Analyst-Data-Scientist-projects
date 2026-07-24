@@ -218,4 +218,4 @@ If you find an error or have an idea to improve the guide, feel free to open an 
 
 ---
 
-Happy coding! 🚀
+Happy coding! 
