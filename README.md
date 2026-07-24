@@ -40,6 +40,33 @@ The workflow presented here follows modern Python development practices and is s
 
 ---
 
+---
+
+## 🗺️ Learning path
+
+If you are setting up a Python development environment for the first time,
+follow the chapters in order.
+
+Each chapter builds on concepts and tools introduced in the previous chapter.
+
+| Step | Chapter | Goal |
+|---:|---|---|
+| 00 | [Initial setup](00_Initial_Setup/00-%20Initial%20Setup.md) | Install and configure Git, pyenv-win, Python, uv, and Visual Studio Code |
+| 01 | [Virtual environments and packages](01_Virtual_Environments_and_Packages/01%20-%20Virtual%20Environments%20and%20Packages.md) | Understand dependency management and why projects need isolated environments |
+| 02 | [Configure Visual Studio Code](02_Configure_VS_Code/02%20-%20Configure%20VS%20Code.md) | Configure VS Code and connect it to the project environment |
+| 03 | [Create a new Python project](03_Create_New_Python_Project/03%20-%20Create%20a%20New%20Python%20Project.md) | Create a reproducible Python project using Git, pyenv, and uv |
+| 04 | [Create a good `.gitignore`](04_Gitignore/04%20-%20gitignore.md) | Understand which files should and should not be tracked by Git |
+| 05 | [Daily workflow](05_Daily_Workflow/05%20-%20Daily%20Workflow.md) | Learn how to start, develop, run, and save work every day |
+| 06 | [Git tutorial](06_Git_tutorial/06%20-%20Git%20tutorial.md) | Learn the essential Git commands used in daily development |
+| 07 | [Troubleshooting](07_Troubleshooting/07%20-%20Troubleshooting.md) | Diagnose and resolve common setup and environment problems |
+| 08 | [Recommended habits](08_Recommended_Habits/08%20-%20Recommended%20Habits.md) | Adopt practices that make projects easier to maintain and share |
+
+> [!TIP]
+> Complete Chapters 00–04 before starting your first project.  
+> Chapters 05–08 can then be used as daily references.
+>
+> ---
+
 # Course Structure
 
 The guide is divided into several chapters.
