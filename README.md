@@ -40,32 +40,31 @@ The workflow presented here follows modern Python development practices and is s
 
 ---
 
----
+## Learning path
 
-## 🗺️ Learning path
+The chapters are organised as an onboarding path, starting with the initial setup and gradually introducing the workflow used to create, maintain, and collaborate on Python projects.
 
-If you are setting up a Python development environment for the first time,
-follow the chapters in order.
+Follow the chapters in order when setting up your environment for the first time. Each chapter can also be used independently as a reference when returning to a specific topic.
 
-Each chapter builds on concepts and tools introduced in the previous chapter.
+Throughout the guide, the examples use a fictional project named `sales-analysis`.
 
 | Step | Chapter | Goal |
 |---:|---|---|
-| 00 | [Initial setup](00_Initial_Setup/00-%20Initial%20Setup.md) | Install and configure Git, pyenv-win, Python, uv, and Visual Studio Code |
-| 01 | [Virtual environments and packages](01_Virtual_Environments_and_Packages/01%20-%20Virtual%20Environments%20and%20Packages.md) | Understand dependency management and why projects need isolated environments |
-| 02 | [Configure Visual Studio Code](02_Configure_VS_Code/02%20-%20Configure%20VS%20Code.md) | Configure VS Code and connect it to the project environment |
-| 03 | [Create a new Python project](03_Create_New_Python_Project/03%20-%20Create%20a%20New%20Python%20Project.md) | Create a reproducible Python project using Git, pyenv, and uv |
-| 04 | [Create a good `.gitignore`](04_Gitignore/04%20-%20gitignore.md) | Understand which files should and should not be tracked by Git |
-| 05 | [Daily workflow](05_Daily_Workflow/05%20-%20Daily%20Workflow.md) | Learn how to start, develop, run, and save work every day |
-| 06 | [Git tutorial](06_Git_tutorial/06%20-%20Git%20tutorial.md) | Learn the essential Git commands used in daily development |
-| 07 | [Troubleshooting](07_Troubleshooting/07%20-%20Troubleshooting.md) | Diagnose and resolve common setup and environment problems |
-| 08 | [Recommended habits](08_Recommended_Habits/08%20-%20Recommended%20Habits.md) | Adopt practices that make projects easier to maintain and share |
+| 00 | [Initial setup](00_Initial_Setup/00%20-%20Initial%20Setup.md) | Install and configure Git, pyenv-win, Python, uv, Visual Studio Code, and the extensions used throughout the guide |
+| 01 | [Virtual environments and packages](01_Virtual_Environments_and_Packages/01%20-%20Virtual%20Environments%20and%20Packages.md) | Understand why projects use isolated environments and how pyenv, uv, `pyproject.toml`, and `uv.lock` work together |
+| 02 | [Setting up Visual Studio Code](02_Setting_Up_Visual_Studio_Code/02%20-%20Setting%20up%20Visual%20Studio%20Code.md) | Configure VS Code, open projects correctly, and select the project’s Python interpreter |
+| 03 | [Creating your first project](03_Create_A_First_Project/03%20-%20Creating%20Your%20First%20Project.md) | Create and organise a Python project for data analysis, install Jupyter, and prepare its `.gitignore` |
+| 04 | [Managing dependencies with uv](04_Managing_Dependencies_with_uv/04%20-%20Managing%20Dependencies%20with%20uv.md) | Add, remove, and synchronise project dependencies while understanding the role of the project configuration and lockfile |
+| 05 | [Daily workflow](05_Daily_Workflow/05%20-%20Daily%20Workflow.md) | Follow a consistent routine for opening projects, synchronising environments, running code, and adding dependencies |
+| 06 | [Version control with Git](06_Version_Control_with_Git/06%20-%20Version%20Control%20with%20Git.md) | Track changes, create meaningful commits, and synchronise work with a remote Git repository |
+| 07 | [Growing a project](07_Growing_a_Project/07%20-%20Growing%20a%20Project.md) | Recognise when a project needs more structure and separate exploratory notebooks from reusable Python code |
+| 08 | [Troubleshooting](08_Troubleshooting/08%20-%20Troubleshooting.md) | Diagnose and resolve common issues involving Python versions, dependencies, PowerShell, Git, and VS Code |
 
-> [!TIP]
-> Complete Chapters 00–04 before starting your first project.  
-> Chapters 05, 06, 08 can then be used as daily references.
->
-> ---
+> [!NOTE]
+> Chapters 00 to 03 provide the foundations needed to create a new project.  
+> Chapters 04 to 08 can also be revisited independently as day-to-day references.
+
+---
 
 # Course Structure
 
