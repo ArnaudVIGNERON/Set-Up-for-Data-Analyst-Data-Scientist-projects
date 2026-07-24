@@ -7,6 +7,8 @@ tags:
   - tutorial
   - uv
   - pyenv
+  - VS code
+  - winget
 ---
 
 # Part 0 — Initial Setup
