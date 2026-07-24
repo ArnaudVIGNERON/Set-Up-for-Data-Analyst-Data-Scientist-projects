@@ -325,6 +325,10 @@ We'll use:
 
 Together, these tools help us build projects that are easier to maintain, easier to reproduce, and easier to share.
 
+A note before continuing
+
+Throughout the rest of this guide, we'll assume that every Python project follows the workflow introduced in this chapter. Whenever we create a new project, we'll rely on `pyenv` and `uv` to build and manage its environment.
+
 ---
 
 ## After completing this chapter
