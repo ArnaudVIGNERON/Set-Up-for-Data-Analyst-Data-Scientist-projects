@@ -42,6 +42,16 @@ This shows which files changed.
 
 ---
 
+## Pull latest changes
+
+```powershell
+git pull
+```
+
+Do this before starting work if others also work on the repository.
+
+---
+
 ## Stage files
 
 Stage all changes:
@@ -137,11 +147,3 @@ git push
 ```
 
 ---
-
-## Pull latest changes
-
-```powershell
-git pull
-```
-
-Do this before starting work if others also work on the repository.
