@@ -1,3 +1,16 @@
+---
+title: 03 - Create a New Python Project
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - python
+  - tutorial
+  - git
+  - pyenv
+  - uv
+  - VS Code
+---
+
 # Part 3 — Create a New Python Project
 
 Create the folder:
