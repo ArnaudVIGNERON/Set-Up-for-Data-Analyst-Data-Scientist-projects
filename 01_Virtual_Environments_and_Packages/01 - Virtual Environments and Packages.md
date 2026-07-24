@@ -5,6 +5,7 @@ date: 2026-07-24
 tags:
   - python
   - tutorial
+  - uv
 ---
 
 # 01 - Installing Python Packages
