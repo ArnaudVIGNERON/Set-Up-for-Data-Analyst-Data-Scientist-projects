@@ -1,3 +1,12 @@
+---
+title: 06 - Git Tutorial
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - git
+  - tutorial
+---
+
 # Part 6 — Git Tutorial
 
 ## What is Git?
