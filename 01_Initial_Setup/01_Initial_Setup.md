@@ -6,8 +6,9 @@
 
 Check if it is installed:
 
-In powershell or equivalent :
+```powershell
 winget --version
+```
 
 If this returns a version number, continue.
 
