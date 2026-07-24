@@ -1,3 +1,12 @@
+---
+title: 02 - Configure VS Code
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - VS Code
+  - tutorial
+---
+
 ## Part 2 — Configure VS Code
 
 Open VS Code settings JSON:
