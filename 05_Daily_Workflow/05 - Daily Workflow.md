@@ -1,3 +1,16 @@
+---
+title: 05 - Daily Workflow
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - python
+  - tutorial
+  - uv
+  - VS Code
+  - pyenv
+  - git
+---
+
 # Part 5 — Daily Workflow
 
 ## Start work
