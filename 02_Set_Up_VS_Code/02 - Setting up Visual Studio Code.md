@@ -112,7 +112,7 @@ You can verify the selected interpreter by looking at the bottom-right corner of
 
 The following screenshot shows a project using the correct interpreter.
 
-<img src="img/interpreter_selected.png" width="450">
+<img src="img/Interpreter_chosen.png" width="450">
 
 If the interpreter displayed in the status bar corresponds to your project's virtual environment, no further action is required.
 
@@ -132,7 +132,7 @@ Python: Select Interpreter
 
 The following screenshot shows where to find the command.
 
-<img src="img/find_select_interpreter.png" width="700">
+<img src="img/Find_select_interpreter.png" width="700">
 
 Selecting this command opens the list of available Python interpreters.
 
@@ -140,7 +140,7 @@ Choose the interpreter located inside the project's `.venv` folder. In most case
 
 The following screenshot shows an example.
 
-<img src="img/select_interpreter.png" width="700">
+<img src="img/Select_interpreter.png" width="700">
 
 Once selected, Visual Studio Code remembers this choice for the project, so you won't need to repeat this step every time you open it.
 
