@@ -52,7 +52,7 @@ Throughout the guide, the examples use a fictional project named `sales-analysis
 |---:|---|---|
 | 00 | [Initial setup](00_Initial_Setup/00%20-%20Initial%20Setup.md) | Install and configure Git, pyenv-win, Python, uv, Visual Studio Code, and the extensions used throughout the guide |
 | 01 | [Virtual environments and packages](01_Virtual_Environments_and_Packages/01%20-%20Virtual%20Environments%20and%20Packages.md) | Understand why projects use isolated environments and how pyenv, uv, `pyproject.toml`, and `uv.lock` work together |
-| 02 | [Setting up Visual Studio Code](02_Setting_Up_Visual_Studio_Code/02%20-%20Setting%20up%20Visual%20Studio%20Code.md) | Configure VS Code, open projects correctly, and select the project’s Python interpreter |
+| 02 | [Setting up Visual Studio Code](02_Set_Up_VS_Code/02%20-%20Setting%20up%20Visual%20Studio%20Code.md) | Configure VS Code, open projects correctly, and select the project’s Python interpreter |
 | 03 | [Creating your first project](03_Create_A_First_Project/03%20-%20Creating%20Your%20First%20Project.md) | Create and organise a Python project for data analysis, install Jupyter, and prepare its `.gitignore` |
 | 04 | [Managing dependencies with uv](04_Managing_Dependencies_with_uv/04%20-%20Managing%20Dependencies%20with%20uv.md) | Add, remove, and synchronise project dependencies while understanding the role of the project configuration and lockfile |
 | 05 | [Daily workflow](05_Daily_Workflow/05%20-%20Daily%20Workflow.md) | Follow a consistent routine for opening projects, synchronising environments, running code, and adding dependencies |
