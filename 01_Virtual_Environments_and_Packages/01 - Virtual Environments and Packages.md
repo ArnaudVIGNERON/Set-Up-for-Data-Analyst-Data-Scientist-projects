@@ -6,95 +6,147 @@ tags:
   - python
   - tutorial
   - uv
-  - pyenv
 ---
 
 # 01 - Virtual Environments and Packages
 
-Using Python to explore and process data is largely about learning how to use relevant open-source packages such as `pandas`, `numpy`, or `matplotlib`.
+## Goal
 
-These packages have been created and maintained by the open-source community over many years. When a Python project imports and uses one of these packages, that package becomes a **dependency** of the project.
+In this chapter, we'll look at how Python projects are organised.
 
-In this document, we will describe a best-practice approach for managing Python dependencies that is:
+We'll see why every project has its own Python environment, how packages are managed, and how the different files in a project work together.
 
-- convenient;
-- reliable;
-- isolated between projects;
-- reproducible for other developers.
+The goal isn't to memorise every command or every project file. Instead, we'll focus on understanding the workflow we'll use throughout the rest of this guide.
 
-We will achieve this by using:
+## Prerequisites
 
-- a Python virtual environment;
-- the dependency and project manager `uv`;
-- a `pyproject.toml` file;
-- a dependency lockfile.
+Before starting this chapter, you should have completed:
 
-If you are already familiar with virtual environments and tools such as `uv`, PDM, Poetry, or Conda, you may skip this document.
+- 00 - Initial Setup
+
+or already have:
+
+- Git installed
+- pyenv-win installed
+- Python installed
+- uv installed
+
+## Learning objectives
+
+After completing this chapter, you'll be able to:
+
+- explain why installing project packages globally becomes difficult as you work on more projects
+- describe the purpose of a virtual environment
+- understand the role of `pyproject.toml`
+- understand the role of `uv.lock`
+- explain how `pyenv` and `uv` work together
 
 ---
 
-## 1. The problem with installing Python packages globally
+## Why this matters
 
-In Python tutorials and introductory courses, you will often see packages installed directly with `pip`:
+One of the strengths of Python is the large number of packages available to the community. Whether you're cleaning data with `pandas`, creating visualisations with `matplotlib`, or building machine learning models with `scikit-learn`, most projects rely on packages developed and maintained by the open-source community.
+
+As we work on more projects, we'll quickly notice that they don't all use the same packages or even the same versions of those packages. Some projects may also require a different version of Python.
+
+Throughout this guide, we'll organise each project so that it remains independent from the others. This makes projects easier to maintain, easier to reproduce, and much easier to share with other developers.
+
+We'll build this workflow progressively throughout the chapter.
+
+---
+
+## A common beginner approach
+
+When learning Python, it's common to install packages directly with `pip`.
+
+For example:
 
 ```powershell
 pip install pandas
 pip install numpy
 ```
 
-The commands themselves are not necessarily wrong. The problem is **where the packages are installed**.
+There's nothing wrong with this approach when you're learning or experimenting with a single project.
 
-If these commands install packages into a shared or global Python installation, every project on your computer will use the same collection of packages.
+The packages are installed into your default Python installation, and everything works as expected.
 
-For example, your system Python installation could contain:
+The situation changes as you begin working on multiple projects.
 
-```text
-Python 3.11
-├── pandas
-├── numpy
-└── matplotlib
-```
+One project may require a newer version of `pandas`, while another still depends on an older version. Installing or upgrading a package for one project can unintentionally affect another.
 
-This may work when you only have one project, but it quickly becomes difficult to manage when you work on several projects.
+The following diagram illustrates this situation.
 
-Different projects may require:
-
-- different packages;
-- different versions of the same package;
-- different Python versions.
-
-For example:
-
-```text
-Project A requires pandas 2.1
-Project B requires pandas 2.3
-```
-
-Updating `pandas` for Project B could break Project A.
-
-It also becomes difficult to answer an important question:
-
-> Which exact packages and versions are required to reproduce this project?
-
-For this reason, installing project dependencies into a shared global Python environment is not recommended.
-
-_Not recommended: all projects use packages from the same shared Python installation._
+Every project shares the same Python installation and the same collection of installed packages.
 
 <img src="img/local_setup.jpg" width="450">
 
+At first, this may seem convenient because everything is installed in one place.
+
+As the number of projects grows, however, managing package versions becomes increasingly difficult. It also becomes harder to answer a simple question:
+
+> Which packages are required to run this project?
+
+Rather than sharing one Python installation between every project, we'll give each project its own isolated environment.
+
+
 ---
 
-## 2. Python virtual environments
+## One project, one environment
 
-A Python virtual environment is an isolated Python environment created for one project.
+Instead of sharing one Python installation between every project, we'll create a dedicated environment for each project.
+
+A virtual environment is simply an isolated Python installation that belongs to a single project.
 
 It contains:
 
-- a Python interpreter;
-- the packages installed for that project;
-- the command-line tools required by that project.
+- the Python interpreter used by the project
+- the packages installed for that project
+- the command-line tools used during development
 
-A typical project might contain a virtual environment called `.venv`:
+This means that installing or updating a package in one project has no impact on any other project.
+
+The following diagram illustrates this approach.
+
+<img src="img/venv_setup.jpg" width="450">
+
+Each project has its own virtual environment and its own collection of installed packages.
+
+As a result:
+
+- projects remain independent from one another
+- different package versions can coexist on the same computer
+- each project can evolve without affecting the others
+
+Throughout this guide, we'll use one virtual environment for every project we create.
+
+---
+
+## Managing environments with `uv`
+
+Creating and maintaining virtual environments manually quickly becomes repetitive.
+
+Throughout this guide, we'll use `uv` to manage our Python projects.
+
+`uv` helps us:
+
+- create new Python projects
+- create virtual environments
+- install and update packages
+- keep track of project dependencies
+- recreate the same environment on another computer
+- run commands inside the correct environment
+
+We'll use these features throughout the guide, so there's no need to memorise them now.
+
+For the moment, it's enough to know that `uv` is the tool responsible for managing the project's environment.
+
+---
+
+## The project files
+
+When we create a new Python project, a few files appear alongside our source code.
+
+A typical project looks similar to this:
 
 ```text
 sales-analysis/
@@ -105,736 +157,183 @@ sales-analysis/
 └── src/
 ```
 
-The packages installed inside `.venv` are only available to that project.
+Each of these files has a specific role.
 
-Another project can have its own `.venv` containing different packages or different package versions.
-
-This means that projects remain isolated from each other.
-
-```text
-Project A
-└── .venv
-    ├── pandas 2.1
-    └── numpy 1.x
-
-Project B
-└── .venv
-    ├── pandas 2.3
-    └── numpy 2.x
-```
-
-The environment of Project A does not affect Project B, and the environment of Project B does not affect Project A.
+We'll look at them one at a time.
 
 ---
 
-## 3. What `uv` does
+## `pyproject.toml`
 
-`uv` is a Python project and dependency manager.
+Every project contains a file called `pyproject.toml`.
 
-It is installed once on your computer as a standalone command-line tool.
+You can think of it as the project's configuration file.
 
-On Windows, for example, it can be installed with:
+Among other things, it describes:
 
-```powershell
-winget install --id astral-sh.uv --exact
-```
+- the project's name
+- the supported Python version
+- the packages required by the project
 
-`uv` can then be used to:
-
-- create Python projects;
-- create virtual environments;
-- install and remove dependencies;
-- resolve compatible dependency versions;
-- generate a lockfile;
-- synchronize an environment;
-- run commands inside the project environment.
-
-The main idea is:
-
-> `uv` manages the environment for the project instead of installing project packages into the shared system Python installation.
-
-_Recommended: use one virtual environment for each project._
-
-<img src="img/venv_setup.jpg" width="450">
-
-In this diagram:
-
-1. The repository contains the project files.
-2. The project declares its dependencies in `pyproject.toml`.
-3. `uv` reads the project configuration.
-4. `uv` creates a local virtual environment.
-5. The project dependencies are installed inside that environment.
-
-The virtual environment is normally stored in:
-
-```text
-.venv/
-```
-
-This directory stays on your computer and is not uploaded to GitHub.
-
----
-
-## 4. The repository and the local environment
-
-Python projects are often stored in Git repositories hosted on services such as GitHub.
-
-The GitHub repository contains the files required to understand, modify, and reproduce the project.
-
-A typical repository may contain:
-
-```text
-sales-analysis/
-├── .python-version
-├── .gitignore
-├── pyproject.toml
-├── uv.lock
-├── README.md
-├── notebooks/
-├── src/
-└── tests/
-```
-
-It does not normally contain:
-
-```text
-.venv/
-```
-
-The virtual environment is local and machine-specific. It can be recreated from the project files.
-
-A developer downloads a local copy of the repository using Git:
-
-```powershell
-git clone <repository-url>
-```
-
-The developer then enters the project folder:
-
-```powershell
-cd sales-analysis
-```
-
-Finally, the developer recreates the project environment:
-
-```powershell
-uv sync
-```
-
-`uv sync` reads the project configuration and lockfile, creates `.venv` when necessary, and installs the required dependencies.
-
----
-
-## 5. The role of `pyproject.toml`
-
-A modern Python project will often contain a file called:
-
-```text
-pyproject.toml
-```
-
-This file describes the project.
-
-It can contain:
-
-- the project name;
-- the project version;
-- the supported Python versions;
-- the main dependencies;
-- development dependencies;
-- tool configuration.
-
-A simple example is shown below:
+A simplified example is shown below.
 
 ```toml
 [project]
-name = "python-onboarding"
+name = "sales-analysis"
 version = "0.1.0"
-description = "Training material for Python onboarding"
-authors = [
-    { name = "Arnaud Vigneron", email = "arnaud.vigneron@example.com" },
-]
+
 requires-python = ">=3.12,<3.14"
 
 dependencies = [
-    "numpy",
     "pandas",
+    "numpy",
     "matplotlib",
 ]
-
-[dependency-groups]
-dev = [
-    "pytest",
-    "ruff",
-]
 ```
+
+We don't need to understand every line of this file yet.
+
+For now, it's enough to know that `uv` reads this file to understand how the project should be configured.
+
+As we create and maintain projects later in the guide, we'll come back to this file several times.
 
 ---
 
-## 6. Project metadata
+## Working with multiple projects
 
-The project name and version are declared under the `[project]` section:
+As we work on more projects, it's common for each of them to have different requirements.
 
-```toml
-[project]
-name = "python-onboarding"
-version = "0.1.0"
-```
+For example:
 
-The project name identifies the package or application.
+- one project may use Python 3.11 while another uses Python 3.13
+- one project may rely on an older version of `pandas`
+- another project may require additional packages that are not needed elsewhere
 
-The version identifies the current version of the project.
+Because each project has its own virtual environment, they can all coexist on the same computer without interfering with one another.
+
+The following diagram illustrates this idea.
+
+<img src="img/multiple_project_setup.jpg" width="900">
+
+Each project remains independent and can evolve at its own pace without affecting the others.
 
 ---
 
-## 7. Supported Python versions
+## Selecting the Python version
 
-The supported Python versions are declared with `requires-python`:
+So far, we've focused on the project's packages.
 
-```toml
-[project]
-requires-python = ">=3.12,<3.14"
-```
+The Python version itself is just as important.
 
-This means:
+Throughout this guide, we'll use `pyenv` to manage the Python versions installed on our computer.
 
-```text
-Python 3.12 is supported
-Python 3.13 is supported
-Python 3.14 is not supported
-Python 3.11 is not supported
-```
+When we create a project, `pyenv` records the selected Python version in a file called `.python-version`.
 
-This information helps tools such as `uv` determine whether the selected Python version is compatible with the project.
-
-A project may also contain a `.python-version` file:
+For example:
 
 ```text
 3.13.7
 ```
 
-This file tells tools such as `pyenv` which specific Python version should be used when working in the project.
+Whenever we open the project, `pyenv` automatically selects the correct Python version for us.
+
+This means we don't have to remember which version of Python each project uses. The project itself keeps track of that information.
 
 ---
 
-## 8. Main dependencies
+## Reproducing the same environment
 
-The packages required to run the project are declared under `dependencies`:
+Keeping projects independent is only part of the story.
 
-```toml
-[project]
-dependencies = [
-    "numpy",
-    "pandas",
-    "matplotlib",
-]
-```
+We also want another developer to be able to recreate the same environment on their own computer.
 
-These are the direct dependencies of the project.
+That's where `uv.lock` comes in.
 
-For example, if the project contains:
+When packages are installed or updated, `uv` records the exact versions used by the project in the `uv.lock` file.
 
-```python
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-```
+Instead of saying:
 
-then the project depends on:
+> Install a recent version of `pandas`
 
-- `pandas`;
-- `numpy`;
-- `matplotlib`.
+the project can say:
 
-Dependencies can be added using `uv`:
+> Install exactly the versions that were used when this project was last updated.
 
-```powershell
-uv add pandas
-uv add numpy
-uv add matplotlib
-```
+This makes projects much more reproducible.
 
-They can also be added together:
-
-```powershell
-uv add pandas numpy matplotlib
-```
-
-`uv` updates the project configuration automatically.
+Whether the project is opened next week or next year, everyone starts from the same environment.
 
 ---
 
-## 9. Development dependencies
+## Working as a team
 
-Some packages are not required to run the final analysis or application, but they are useful while developing it.
+Sharing a Python project doesn't mean sharing the virtual environment.
 
-Examples include:
+Each developer creates their own local environment.
 
-- `pytest` for tests;
-- `ruff` for formatting and code quality;
-- documentation tools;
-- type-checking tools.
+The project files describe what that environment should contain.
 
-These can be declared in a dependency group:
-
-```toml
-[dependency-groups]
-dev = [
-    "pytest",
-    "ruff",
-]
-```
-
-They can be added using:
-
-```powershell
-uv add --dev pytest ruff
-```
-
-Development dependencies are useful for contributors, but they are not necessarily required by users of the project.
-
----
-
-## 10. The role of `uv.lock`
-
-The `pyproject.toml` file declares the direct dependencies of the project.
-
-However, each dependency may itself depend on other packages.
-
-For example:
-
-```text
-Your project
-└── pandas
-    ├── numpy
-    ├── python-dateutil
-    └── pytz
-```
-
-These additional packages are called **indirect** or **transitive dependencies**.
-
-The complete dependency graph is recorded in:
-
-```text
-uv.lock
-```
-
-The lockfile contains the resolved package versions needed to recreate a consistent project environment.
-
-The distinction is:
-
-```text
-pyproject.toml
-    Describes what the project requires.
-
-uv.lock
-    Records the complete resolved dependency environment.
-```
-
-Both files should normally be committed to Git:
-
-```text
-pyproject.toml
-uv.lock
-```
-
-The local virtual environment should not be committed:
-
-```text
-.venv/
-```
-
----
-
-## 11. Creating a new environment
-
-When creating a new project, you can start with:
-
-```powershell
-mkdir sales-analysis
-cd sales-analysis
-```
-
-Initialize Git:
-
-```powershell
-git init
-```
-
-Select the local Python version:
-
-```powershell
-pyenv local 3.13.7
-```
-
-Initialize the Python project:
-
-```powershell
-uv init
-```
-
-Add dependencies:
-
-```powershell
-uv add pandas numpy matplotlib
-```
-
-Add development tools:
-
-```powershell
-uv add --dev pytest ruff
-```
-
-`uv` will create or synchronize the project virtual environment as needed.
-
-The resulting project may look like this:
-
-```text
-sales-analysis/
-├── .git/
-├── .venv/
-├── .python-version
-├── pyproject.toml
-├── uv.lock
-├── README.md
-└── main.py
-```
-
----
-
-## 12. Reproducing an existing project
-
-Imagine that a developer creates a project and pushes it to GitHub.
-
-The repository contains:
-
-```text
-Repository
-├── .python-version
-├── pyproject.toml
-├── uv.lock
-└── project source files
-```
-
-Another developer can clone the project:
-
-```powershell
-git clone <repository-url>
-cd <repository-folder>
-```
-
-Install the required Python version when necessary:
-
-```powershell
-pyenv install
-```
-
-Then recreate the environment:
-
-```powershell
-uv sync
-```
-
-The new developer now has a local virtual environment containing the dependencies defined by the project.
-
-_Team members can recreate consistent project environments from the same repository._
+The following diagram illustrates this workflow.
 
 <img src="img/collab_setup.jpg" width="900">
 
-The virtual environment itself is not transferred through GitHub.
+When someone clones the repository, `uv` reads the project files and recreates the required environment on their computer.
 
-Instead, GitHub stores the instructions required to recreate it:
+Although each developer has their own virtual environment, everyone works with the same Python version and the same package versions defined by the project.
 
-```text
-.python-version
-pyproject.toml
-uv.lock
-```
-
-This keeps repositories smaller and avoids committing machine-specific files.
+This makes collaboration much more predictable and greatly reduces "it works on my machine" problems.
 
 ---
 
-## 13. Consistent rather than physically identical environments
+## Bringing everything together
 
-When two developers run:
+Let's take a step back and look at how these different tools work together.
 
-```powershell
-uv sync
-```
+When we create a new project, each tool has a specific responsibility.
 
-they recreate consistent dependency environments based on the same project definition and lockfile.
+- `Git` tracks the history of the project and makes collaboration possible.
+- `pyenv` manages the Python version used by the project.
+- `uv` creates the virtual environment and manages the project's packages.
+- `Visual Studio Code` provides the development environment where we'll write, run, and debug our code.
 
-The environments may not be physically identical in every situation.
+The project itself keeps track of its configuration through a few files:
 
-For example:
+| File | Purpose |
+|------|---------|
+| `.python-version` | Specifies which version of Python the project uses |
+| `pyproject.toml` | Describes the project and its packages |
+| `uv.lock` | Records the exact package versions used by the project |
 
-- one developer may use Windows;
-- another may use Linux;
-- one computer may use an Intel processor;
-- another may use an ARM processor.
+Together, these files make it possible to recreate the same development environment on another computer.
 
-Some Python packages provide different builds for different operating systems or processors.
-
-For this reason, it is more accurate to say:
-
-> The development environments are reproducible and consistent.
-
-rather than:
-
-> The environments are always completely identical.
+Whether you're returning to a project several months later or collaborating with another developer, the workflow remains the same.
 
 ---
 
-## 14. Using different project-management tools
+## Summary
 
-The Python ecosystem contains several tools for managing environments and dependencies, including:
+In this chapter, we've introduced the workflow we'll use throughout the rest of this guide.
 
-- `uv`;
-- PDM;
-- Poetry;
-- Conda;
-- `venv` and `pip`.
+Rather than sharing one Python installation between every project, we'll create an isolated environment for each one.
 
-Many of these tools support the `pyproject.toml` standard.
+We'll use:
 
-However, they do not necessarily use the same lockfile format or resolve dependencies in exactly the same way.
+- `pyenv` to manage Python versions
+- `uv` to create and manage project environments
+- `pyproject.toml` to describe the project
+- `uv.lock` to record the exact package versions used by the project
 
-For a team project, it is therefore recommended that all contributors use the project-management tool documented by the repository.
-
-For the projects in this guide, the standard tool is:
-
-```text
-uv
-```
-
-This means that contributors should normally recreate the project environment with:
-
-```powershell
-uv sync
-```
+Together, these tools help us build projects that are easier to maintain, easier to reproduce, and easier to share.
 
 ---
 
-## 15. Working with multiple projects
+## After completing this chapter
 
-Virtual environments allow you to work on several Python projects in parallel.
+You should now be able to:
 
-Each project has:
-
-- its own repository;
-- its own `pyproject.toml`;
-- its own `uv.lock`;
-- its own `.venv`;
-- optionally, its own Python version.
-
-For example:
-
-```text
-Project A
-├── Python 3.11
-├── pandas
-├── numpy
-└── matplotlib
-
-Project B
-├── Python 3.10
-├── pandas
-└── seaborn
-
-Project C
-├── Python 3.12
-└── numpy
-```
-
-_Each project is isolated in its own virtual environment._
-
-<img src="img/multiple_project_setup.jpg" width="900">
-
-The dependencies installed for one project do not affect the dependencies installed for another project.
-
-This is particularly useful when:
-
-- maintaining older projects;
-- testing a project on multiple Python versions;
-- working with different teams;
-- comparing package versions;
-- moving between data-analysis and application-development projects.
-
----
-
-## 16. Using `pyenv` and `uv` together
-
-`pyenv` and `uv` solve related but different problems.
-
-```text
-pyenv
-    Manages Python interpreter versions.
-
-uv
-    Manages project environments and dependencies.
-```
-
-For example:
-
-```powershell
-pyenv install 3.13.7
-pyenv local 3.13.7
-```
-
-This selects Python 3.13.7 for the current project.
-
-You can then initialize or synchronize the project with `uv`:
-
-```powershell
-uv init
-uv add pandas numpy matplotlib
-```
-
-For an existing project:
-
-```powershell
-pyenv install
-uv sync
-```
-
-A useful mental model is:
-
-```text
-pyenv selects the Python version
-            ↓
-uv creates the project environment
-            ↓
-uv installs and locks the project dependencies
-```
-
----
-
-## 17. Running commands inside the environment
-
-You can activate the virtual environment manually:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-After activation, commands such as the following use the project environment:
-
-```powershell
-python --version
-python main.py
-```
-
-You can also run commands through `uv` without activating the environment manually:
-
-```powershell
-uv run python main.py
-```
-
-Run tests:
-
-```powershell
-uv run pytest
-```
-
-Format the project:
-
-```powershell
-uv run ruff format .
-```
-
-Check the code:
-
-```powershell
-uv run ruff check .
-```
-
-Using `uv run` ensures that the command runs inside the correct project environment.
-
----
-
-## 18. Files that should and should not be committed
-
-The following files should normally be committed to Git:
-
-```text
-.python-version
-pyproject.toml
-uv.lock
-README.md
-src/
-tests/
-notebooks/
-```
-
-The following files should normally not be committed:
-
-```text
-.venv/
-__pycache__/
-.env
-.ipynb_checkpoints/
-```
-
-A `.gitignore` file can be used to prevent Git from tracking these local files:
-
-```gitignore
-# Virtual environment
-.venv/
-
-# Python cache
-__pycache__/
-*.py[cod]
-
-# Environment variables and secrets
-.env
-.env.*
-
-# Jupyter
-.ipynb_checkpoints/
-```
-
----
-
-## 19. Summary
-
-Installing every package into one shared Python environment makes projects difficult to maintain and reproduce.
-
-A better workflow is:
-
-1. Use `pyenv` to select the required Python version.
-2. Use one virtual environment per project.
-3. Declare project dependencies in `pyproject.toml`.
-4. Record resolved dependencies in `uv.lock`.
-5. Use `uv sync` to recreate the project environment.
-6. Commit the project definition and lockfile to Git.
-7. Do not commit the `.venv` directory.
-
-The complete workflow looks like this:
-
-```text
-GitHub repository
-├── source code
-├── .python-version
-├── pyproject.toml
-└── uv.lock
-          ↓
-       git clone
-          ↓
-      local project
-          ↓
-       uv sync
-          ↓
-        .venv
-├── Python interpreter
-└── project dependencies
-```
-
-This approach provides:
-
-- isolated projects;
-- cleaner system installations;
-- fewer dependency conflicts;
-- easier collaboration;
-- reproducible environments;
-- a consistent workflow across teams.
+- explain why each project has its own virtual environment
+- describe the role of `pyenv` within a project
+- describe the role of `uv`
+- explain the purpose of `pyproject.toml`
+- explain the purpose of `uv.lock`
+- understand how another developer can recreate the same project environment
