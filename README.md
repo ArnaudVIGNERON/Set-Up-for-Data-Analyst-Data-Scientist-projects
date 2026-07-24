@@ -36,12 +36,11 @@ project-name
 └── tests  
   
 Each tool has a specific role:  
-  
-Tool	Purpose  
-Git	Track code changes  
+
+Git	tracks code changes  
 GitHub	Store and share projects online  
-VS Code	Write and run code  
+VS Code	to run your code   
 pyenv-win	Manage Python versions  
 uv	Manage virtual environments and packages  
 Ruff	Format code and detect issues  
-Jupyter	Explore data interactively  
+Jupyter	allows you to xplore data interactively  
