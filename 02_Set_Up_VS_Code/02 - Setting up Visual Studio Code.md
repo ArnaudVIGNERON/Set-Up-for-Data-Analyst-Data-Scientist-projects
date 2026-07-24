@@ -112,7 +112,7 @@ You can verify the selected interpreter by looking at the bottom-right corner of
 
 The following screenshot shows a project using the correct interpreter.
 
-<img src="img/Interpreter_chosen.png" width="450">
+<img src="img/Interpreter_Chosen.png" width="450">
 
 If the interpreter displayed in the status bar corresponds to your project's virtual environment, no further action is required.
 
