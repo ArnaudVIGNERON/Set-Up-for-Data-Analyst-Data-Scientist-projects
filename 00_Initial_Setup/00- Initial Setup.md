@@ -20,11 +20,11 @@ In this chapter, we will prepare your Windows computer for Python development.
 
 We will install the tools used throughout this guide:
 
-- Git;
-- pyenv-win;
-- Python;
-- uv;
-- Visual Studio Code.
+- Git
+- pyenv-win
+- Python
+- uv
+- Visual Studio Code
 
 Do not worry if some of these tools are unfamiliar. We will introduce them one at a time and verify each installation before moving to the next one.
 
