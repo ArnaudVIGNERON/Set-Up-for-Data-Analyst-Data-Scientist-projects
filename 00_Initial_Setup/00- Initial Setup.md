@@ -1,4 +1,15 @@
-# Part 1 — Initial Setup
+---
+title: 00 - Initial Setup
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - python
+  - tutorial
+  - uv
+  - pyenv
+---
+
+# Part 0 — Initial Setup
 
 ## 1. Install winget
 
