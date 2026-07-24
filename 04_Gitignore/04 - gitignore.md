@@ -1,3 +1,12 @@
+---
+title: 04 - Create a Good .gitignore
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - git
+  - tutorial
+---
+
 # Part 4 — Create a Good .gitignore
 
 The `.gitignore` file tells Git what not to track.
