@@ -88,4 +88,105 @@ The following screenshot shows the typical workflow.
 
 Once the project opens, the Explorer displays the complete project structure, including the virtual environment and the configuration files introduced in the previous chapter.
 
+<img src="img/VS_Code_tree.png" width="900">
+
 We'll use this view throughout the rest of the guide.
+
+---
+
+## Selecting the Python interpreter
+
+Every time a Python project is opened, Visual Studio Code needs to know which Python installation it should use.
+
+Throughout this guide, that will almost always be the Python interpreter inside the project's virtual environment.
+
+If the correct interpreter isn't selected, you may notice:
+
+- Import errors even though the required packages are installed
+- The wrong version of Python being used
+- Code that runs in the terminal but not in Visual Studio Code
+
+Fortunately, Visual Studio Code usually detects the project's virtual environment automatically.
+
+You can verify the selected interpreter by looking at the bottom-right corner of the window.
+
+The following screenshot shows a project using the correct interpreter.
+
+<img src="img/interpreter_selected.png" width="450">
+
+If the interpreter displayed in the status bar corresponds to your project's virtual environment, no further action is required.
+
+If a different interpreter is selected, or if no interpreter is shown, you can select it manually.
+
+Open the Command Palette using:
+
+```text
+Ctrl + Shift + P
+```
+
+Then search for:
+
+```text
+Python: Select Interpreter
+```
+
+The following screenshot shows where to find the command.
+
+<img src="img/find_select_interpreter.png" width="700">
+
+Selecting this command opens the list of available Python interpreters.
+
+Choose the interpreter located inside the project's `.venv` folder. In most cases, Visual Studio Code marks it as **Recommended**.
+
+The following screenshot shows an example.
+
+<img src="img/select_interpreter.png" width="700">
+
+Once selected, Visual Studio Code remembers this choice for the project, so you won't need to repeat this step every time you open it.
+
+---
+
+## Recommended extensions
+
+Throughout this guide, we'll use a small number of extensions that make Python development easier.
+
+### Essential
+
+- Python
+- Pylance
+- Ruff
+- GitLens
+
+These extensions provide Python support, code analysis, formatting, linting, and Git integration.
+
+### Recommended
+
+- Jupyter
+- Error Lens
+- Even Better TOML
+- Markdown All in One
+- GitHub Pull Requests and Issues
+
+These extensions improve the development experience but are not required to follow the guide.
+
+---
+
+## Configuring Visual Studio Code
+
+Visual Studio Code offers hundreds of configuration options.
+
+Rather than configuring each project individually, we'll configure our user settings once and use the same setup throughout this guide.
+
+Open the Command Palette:
+
+```text
+Ctrl + Shift + P
+```
+
+Search for:
+
+```text
+Preferences: Open User Settings (JSON)
+```
+
+In the next section, we'll review the different settings before combining them into a single `settings.json` file.
