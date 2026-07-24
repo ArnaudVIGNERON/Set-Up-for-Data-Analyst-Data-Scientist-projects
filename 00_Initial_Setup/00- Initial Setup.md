@@ -34,17 +34,17 @@ By the end of the chapter, your computer will be ready to create isolated, repro
 
 This guide assumes that you are using:
 
-- Windows 11;
-- PowerShell;
-- a Windows user account that is allowed to install applications.
+- Windows 11
+- PowerShell
+- a Windows user account that is allowed to install applications
 
 You do not need to open PowerShell as an administrator unless Windows specifically asks you to do so.
 
 To open PowerShell:
 
-1. Open the Windows Start menu.
-2. Search for `PowerShell`.
-3. Select **Windows PowerShell** or **PowerShell**.
+1. Open the Windows Start menu
+2. Search for `PowerShell`
+3. Select **Windows PowerShell** or **PowerShell**
 
 ---
 
@@ -157,9 +157,9 @@ Installing and switching between these versions manually can quickly become conf
 
 `pyenv-win` solves this problem on Windows. It lets us:
 
-- install multiple Python versions;
-- choose a default Python version;
-- select a different Python version for an individual project.
+- install multiple Python versions
+- choose a default Python version
+- select a different Python version for an individual project
 
 In later chapters, each project will declare which Python version it expects.
 
@@ -306,12 +306,12 @@ The first result should normally point to the pyenv-win `shims` directory.
 
 Python projects usually rely on external packages such as:
 
-- `pandas`;
-- `numpy`;
-- `matplotlib`;
-- `seaborn`;
-- `pytest`;
-- `ruff`.
+- `pandas`
+- `numpy`
+- `matplotlib`
+- `seaborn`
+- `pytest`
+- `ruff`
 
 We do not want to install all of these packages into one shared Python installation.
 
@@ -319,12 +319,12 @@ Instead, every project will have its own isolated environment and its own list o
 
 `uv` is the tool we will use to:
 
-- create Python projects;
-- create virtual environments;
-- add and remove packages;
-- record project dependencies;
-- reproduce an environment on another computer;
-- run commands inside the correct project environment.
+- create Python projects
+- create virtual environments
+- add and remove packages
+- record project dependencies
+- reproduce an environment on another computer
+- run commands inside the correct project environment
 
 We will explore these concepts in detail in the next chapter.
 
