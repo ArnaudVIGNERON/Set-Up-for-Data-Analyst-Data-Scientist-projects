@@ -63,7 +63,7 @@ Each chapter builds on concepts and tools introduced in the previous chapter.
 
 > [!TIP]
 > Complete Chapters 00–04 before starting your first project.  
-> Chapters 05–08 can then be used as daily references.
+> Chapters 05, 06, 08 can then be used as daily references.
 >
 > ---
 
