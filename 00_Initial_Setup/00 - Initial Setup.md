@@ -54,7 +54,7 @@ Throughout the rest of this repository, we'll build on this environment rather t
 
 ---
 
-# 1. Install winget
+## Install winget
 
 `winget` is the Windows package manager.
 
@@ -70,7 +70,7 @@ If a version number is displayed, you can continue to the next step.
 
 ---
 
-# 2. Install Git
+## Install Git
 
 Git records the history of your projects and makes collaboration much easier.
 
@@ -103,7 +103,7 @@ git config --list
 
 ---
 
-# 3. Install pyenv-win
+## Install pyenv-win
 
 `pyenv-win` allows you to install and switch between multiple Python versions.
 
@@ -167,7 +167,7 @@ pyenv --version
 
 ---
 
-# 4. Install Python
+## Install Python
 
 We'll install several Python versions.
 
@@ -202,7 +202,7 @@ pyenv versions
 
 ---
 
-# 5. Install uv
+## Install uv
 
 `uv` is responsible for creating virtual environments and managing project dependencies.
 
@@ -220,7 +220,7 @@ uv --version
 
 ---
 
-# 6. Install Visual Studio Code
+## Install Visual Studio Code
 
 Install Visual Studio Code.
 
