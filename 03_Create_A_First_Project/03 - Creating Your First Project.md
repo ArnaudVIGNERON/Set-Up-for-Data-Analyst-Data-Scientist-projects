@@ -85,3 +85,176 @@ cd C:\Python_Projects
 ```
 
 From here, we're ready to create our first project.
+
+---
+
+## Creating a new project
+
+Throughout this guide, we'll use a project named `sales-analysis`.
+
+The goal isn't to build a complete application, but to use a consistent example while learning the workflow.
+
+From your `Python_Projects` folder, create the project with:
+
+```powershell
+uv init sales-analysis
+```
+
+This command creates a new folder named `sales-analysis` and generates the files required to start a modern Python project.
+
+Navigate to the project:
+
+```powershell
+cd .\sales-analysis\
+```
+
+Open the project in Visual Studio Code:
+
+```powershell
+code .
+```
+
+The following screenshot shows the complete workflow.
+
+<img src="img/create_project_terminal.png" width="900">
+
+Once the project opens, you should see a structure similar to the following.
+
+<img src="img/Open_VS_Code_Project.png" width="900">
+
+At this point, the project has been created successfully.
+
+Before we continue, let's take a moment to understand the files that `uv` generated for us.
+
+---
+
+## Understanding the project structure
+
+A newly created project contains a small number of files.
+
+Each of them has a specific role within the project.
+
+```text
+sales-analysis/
+├── .python-version
+├── .git/
+├── .gitignore
+├── .python-version
+├── .venv/
+├── main.py
+├── pyproject.toml
+├── README.md
+└── uv.lock
+```
+
+Let's briefly look at the purpose of each file.
+
+| File | Purpose |
+|------|---------|
+| `.git/` | Stores the Git repository and project history |
+| `.gitignore` | Defines which files and folders Git should ignore |
+| `.python-version` | Records the Python version used by the project |
+| `.venv/` | Contains the project's virtual environment |
+| `main.py` | A simple Python entry point created by `uv` |
+| `pyproject.toml` | Describes the project and its dependencies |
+| `README.md` | Documents the project |
+| `uv.lock` | Records the exact versions of installed packages |
+
+At this stage, there's no need to understand every file in detail.
+
+Throughout the rest of this guide, we'll come back to each of them as they become relevant.
+
+---
+
+## Preparing the project
+
+`uv` creates a clean starting point for any Python project.
+
+Before we begin working, we'll make a few small changes that better support a typical data analysis workflow.
+
+### Creating a `notebooks` folder
+
+Many data analysis projects begin with exploration.
+
+Rather than writing Python scripts immediately, it's common to explore datasets, test ideas, and create visualizations using Jupyter notebooks.
+
+Throughout this guide, we'll keep notebooks inside a dedicated `notebooks` folder.
+
+Create it with:
+
+```powershell
+mkdir notebooks
+```
+
+Your project should now look similar to this:
+
+```text
+sales-analysis/
+├── .git/
+├── .gitignore
+├── .python-version
+├── .venv/
+├── notebooks/
+├── main.py
+├── pyproject.toml
+├── README.md
+└── uv.lock
+```
+
+This provides a simple starting point for most data analysis projects. As projects grow, you may decide to add additional folders, but we'll keep the structure intentionally simple for now.
+
+---
+
+## Installing Jupyter
+
+Many data analysis projects rely on Jupyter notebooks during the exploration phase.
+
+We'll use Jupyter throughout this guide, so let's install it now.
+
+```powershell
+uv add jupyter
+```
+
+The command installs Jupyter inside the project's virtual environment and updates the project configuration.
+
+<img src="img/add_jupyter.png" width="900">
+
+Don't worry about the list of installed packages. Jupyter depends on many other Python packages, and `uv` installs everything automatically.
+
+We'll come back to package management in the next chapter, where we'll learn how `uv` adds, updates, and removes project dependencies.
+
+---
+
+## Creating a `.gitignore`
+
+A Git repository should only contain files that are needed to understand, run, and maintain the project.
+
+Files that can be recreated automatically, such as virtual environments or temporary cache files, should not be committed.
+
+Create a file named `.gitignore` in the project root and add the following content.
+
+```gitignore
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+
+# Ruff
+.ruff_cache/
+
+# Pytest
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Visual Studio Code
+.vscode/
+
+# Operating system
+.DS_Store
+Thumbs.db
+```
+
+We'll revisit this file later when we look at Git in more detail.
