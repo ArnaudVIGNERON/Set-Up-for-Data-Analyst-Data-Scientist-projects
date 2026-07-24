@@ -1,3 +1,14 @@
+---
+title: 07 - Troubleshooting
+author: Arnaud Vigneron
+date: 2026-07-24
+tags:
+  - tutorial
+  - uv
+  - pyenv
+  - VS Code
+---
+
 # Part 7 — Troubleshooting
 
 ## pyenv is not recognized
