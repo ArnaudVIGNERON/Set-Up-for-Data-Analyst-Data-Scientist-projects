@@ -258,3 +258,56 @@ Thumbs.db
 ```
 
 We'll revisit this file later when we look at Git in more detail.
+
+---
+
+## Creating a `.gitignore`
+
+Now that the project has been created, let's tell Git which files should be tracked and which files should remain local to your computer.
+
+The purpose of a `.gitignore` file is to exclude files that can be recreated automatically or that are specific to your development environment.
+
+For example:
+
+- the project's virtual environment
+- temporary cache files
+- editor-specific settings
+- operating system files
+
+These files are useful while developing, but they shouldn't become part of the project's history.
+
+Create a file named `.gitignore` in the root of the project and add the following content.
+
+<img src="img/gitignore.png" width="900">
+
+```gitignore
+# Virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+
+# Ruff cache
+.ruff_cache/
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Visual Studio Code
+.vscode/
+
+# Operating system
+.DS_Store
+Thumbs.db
+```
+
+At first glance, this file may seem like a list of folders to ignore.
+
+In practice, it's a way of keeping the repository focused on the files that define the project rather than the files generated while working on it.
+
+Anyone cloning the repository can recreate these ignored files automatically from the project's configuration.
+
+We'll come back to `.gitignore` later in the Git chapter, where we'll explain in more detail how Git tracks changes.
