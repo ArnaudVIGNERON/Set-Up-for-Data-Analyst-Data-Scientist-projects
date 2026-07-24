@@ -6,6 +6,7 @@ tags:
   - python
   - tutorial
   - uv
+  - pyenv
 ---
 
 # 01 - Virtual Environments and Packages
