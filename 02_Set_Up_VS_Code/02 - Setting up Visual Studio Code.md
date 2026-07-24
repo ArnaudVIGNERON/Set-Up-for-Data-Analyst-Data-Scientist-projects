@@ -169,6 +169,8 @@ These extensions provide Python support, code analysis, formatting, linting, and
 
 These extensions improve the development experience but are not required to follow the guide.
 
+If you already use different extensions that provide similar functionality, feel free to continue using them. The extensions listed above are simply the ones used throughout this guide.
+
 ---
 
 ## Configuring Visual Studio Code
@@ -190,3 +192,165 @@ Preferences: Open User Settings (JSON)
 ```
 
 In the next section, we'll review the different settings before combining them into a single `settings.json` file.
+
+---
+
+## Configuring Visual Studio Code
+
+Visual Studio Code stores its configuration in a file called `settings.json`.
+
+Rather than changing settings as we discover new features, we'll configure Visual Studio Code once and use the same configuration throughout this guide.
+
+We'll review the configuration by section before combining everything into a single file.
+
+---
+
+### Editor settings
+
+```json
+"editor.formatOnSave": true,
+"editor.tabSize": 4,
+"editor.rulers": [88],
+"files.trimTrailingWhitespace": true,
+"files.insertFinalNewline": true,
+```
+
+These settings improve the editing experience and help keep files consistent across projects.
+
+In particular, formatting code automatically when saving helps us maintain a consistent coding style without thinking about it.
+
+---
+
+### Python settings
+
+```json
+"python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+"python.terminal.activateEnvironment": true,
+"python.analysis.typeCheckingMode": "basic",
+```
+
+These settings configure how Visual Studio Code interacts with Python projects.
+
+The default interpreter points to the project's virtual environment, while automatically activating the environment ensures that the integrated terminal always uses the correct Python installation.
+
+---
+
+### Ruff settings
+
+```json
+"[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+},
+
+"editor.codeActionsOnSave": {
+    "source.fixAll.ruff": "explicit",
+    "source.organizeImports.ruff": "explicit"
+},
+```
+
+Throughout this guide, we'll use Ruff as our formatter and linter to format our code, organize imports, and report common issues. Using a single tool keeps the configuration simple and avoids having to maintain multiple tools that perform similar tasks.
+
+---
+
+### Git settings
+
+```json
+"git.autofetch": true,
+"git.confirmSync": false,
+```
+
+These settings improve the Git integration built into Visual Studio Code.
+
+Automatic fetching keeps your local repository up to date with changes from the remote repository without requiring manual refreshes.
+
+---
+
+### Terminal settings
+
+```json
+"terminal.integrated.defaultProfile.windows": "PowerShell"
+```
+
+Throughout this guide, we'll use PowerShell as our integrated terminal.
+
+This keeps the commands consistent with the examples shown in each chapter.
+
+---
+
+## Complete configuration
+
+The complete `settings.json` used throughout this guide is shown below.
+
+```json
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.rulers": [88],
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+
+    "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.typeCheckingMode": "basic",
+
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+
+    "editor.codeActionsOnSave": {
+        "source.fixAll.ruff": "explicit",
+        "source.organizeImports.ruff": "explicit"
+    },
+
+    "git.autofetch": true,
+    "git.confirmSync": false,
+
+    "terminal.integrated.defaultProfile.windows": "PowerShell"
+}
+
+---
+
+## Verifying your setup
+
+Before moving on, verify that:
+
+- The project opens successfully using `code .`
+- The Explorer displays the complete project structure
+- The correct Python interpreter is selected
+- The integrated terminal opens in the project folder
+- Python files are formatted automatically when saved
+
+If one of these steps doesn't work as expected, it's worth taking a few minutes to fix it now. A correctly configured development environment will make the rest of the guide much smoother.
+
+---
+
+## Summary
+
+In this chapter, we've prepared Visual Studio Code for the workflow we'll use throughout the rest of this guide.
+
+Rather than opening individual files, we'll always open the project using `code .` from a PowerShell terminal. This allows Visual Studio Code to automatically detect the project's virtual environment, Git repository, and configuration files.
+
+We've also configured Visual Studio Code to:
+
+- use the project's virtual environment
+- format Python code automatically
+- use Ruff for formatting and linting
+- integrate with Git
+- use PowerShell as the default terminal
+
+These settings provide a consistent development environment across all of our Python projects.
+
+> [!NOTE]
+> This configuration reflects the workflow used throughout this guide. As you become more familiar with Visual Studio Code, you may decide to customize these settings to better match your own preferences.
+
+---
+
+## After completing this chapter
+
+You should now be able to:
+
+- open a Python project correctly using `code .`
+- understand how Visual Studio Code detects the project environment
+- verify that the correct Python interpreter is selected
+- configure Visual Studio Code for the workflow used throughout this guide
+- confirm that your development environment is ready before creating or modifying Python projects
